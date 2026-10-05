@@ -27,3 +27,23 @@ DELETE {{baseUrl}}/api/categorias/1
 
 ### Buscar inexistente (deve dar 404)
 GET {{baseUrl}}/api/categorias/999
+
+### Criar categoria (se precisar)
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+
+{
+  "nome": "Hardware"
+}
+
+### Abrir chamado
+POST {{baseUrl}}/api/chamados
+Content-Type: application/json
+
+{
+  "titulo": "Computador nao liga",
+  "descricao": "O computador da sala 3 nao liga desde ontem",
+  "prioridade": "Alta",
+  "solicitanteNome": "Maria Souza",
+  "categoriaId": 2
+}

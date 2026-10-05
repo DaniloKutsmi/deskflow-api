@@ -20,9 +20,8 @@ namespace DeskFlow.API.Models.Entities
         [MaxLength(10)]
         public string Prioridade { get; set; }
 
-        [Required]
         [MaxLength(20)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Required]
         [MaxLength(150)]

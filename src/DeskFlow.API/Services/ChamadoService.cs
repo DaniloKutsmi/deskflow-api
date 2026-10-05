@@ -94,5 +94,15 @@ namespace DeskFlow.API.Services
 
             return interacao;
         }
+
+        public async Task<Chamado?> ObterDetalhesAsync(int id)
+        {
+            return await _repository.ObterDetalhesAsync(id);
+        }
+
+        public async Task<List<Chamado>> ListarAsync(string? status, string? prioridade, int? categoriaId)
+        {
+            return await _repository.ListarAsync(status, prioridade, categoriaId);
+        }
     }
 }

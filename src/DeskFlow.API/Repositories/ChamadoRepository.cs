@@ -23,6 +23,25 @@ namespace DeskFlow.API.Repositories
             return await _context.Chamados.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Chamado?> ObterDetalhesAsync(int id)
+        {
+            return await _context.Chamados
+                .Include(c => c.Categoria)
+                .Include(c => c.Interacoes)
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<List<Chamado>> ListarAsync(string? status, string? prioridade, int? categoriaId)
+        {
+            return await _context.Chamados
+                .Include(c => c.Categoria)
+                .Include(c => c.Interacoes)
+                .Where(c => (status == null || c.Status == status)
+                         && (prioridade == null || c.Prioridade == prioridade)
+                         && (categoriaId == null || c.CategoriaId == categoriaId))
+                .ToListAsync();
+        }
+
         public void Atualizar(Chamado chamado)
         {
             _context.Chamados.Update(chamado);

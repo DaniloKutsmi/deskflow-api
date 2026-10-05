@@ -17,11 +17,31 @@ namespace DeskFlow.API.Controllers
             _service = service;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Listar([FromQuery] string? status, [FromQuery] string? prioridade, [FromQuery] int? categoriaId)
+        {
+            var chamados = await _service.ListarAsync(status, prioridade, categoriaId);
+            return Ok(chamados);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterPorId(int id)
+        {
+            var chamado = await _service.ObterDetalhesAsync(id);
+
+            if (chamado == null)
+            {
+                return NotFound("Chamado nao encontrado.");
+            }
+
+            return Ok(chamado);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Abrir([FromBody] Chamado chamado)
         {
             var chamadoAberto = await _service.AbrirChamadoAsync(chamado);
-            return StatusCode(201, chamadoAberto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = chamadoAberto.Id }, chamadoAberto);
         }
 
         [HttpPost("{id}/iniciar")]

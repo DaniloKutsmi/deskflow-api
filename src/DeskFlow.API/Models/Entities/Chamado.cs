@@ -38,5 +38,7 @@ namespace DeskFlow.API.Models.Entities
 
         [ForeignKey("CategoriaId")]
         public Categoria? Categoria { get; set; }
+
+        public List<Interacao> Interacoes { get; set; } = new List<Interacao>();
     }
 }

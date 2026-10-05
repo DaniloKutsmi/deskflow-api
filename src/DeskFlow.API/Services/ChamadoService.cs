@@ -71,5 +71,28 @@ namespace DeskFlow.API.Services
 
             return chamado;
         }
+
+        public async Task<Interacao?> AdicionarInteracaoAsync(int chamadoId, Interacao interacao)
+        {
+            var chamado = await _repository.ObterPorIdAsync(chamadoId);
+
+            if (chamado == null)
+            {
+                return null;
+            }
+
+            if (chamado.Status == "Fechado")
+            {
+                throw new RegraNegocioException("Nao e possivel adicionar interacao em um chamado Fechado.");
+            }
+
+            interacao.ChamadoId = chamadoId;
+            interacao.DataRegistro = DateTime.Now;
+
+            await _repository.AdicionarInteracaoAsync(interacao);
+            await _repository.SalvarAsync();
+
+            return interacao;
+        }
     }
 }

@@ -28,6 +28,11 @@ namespace DeskFlow.API.Repositories
             _context.Chamados.Update(chamado);
         }
 
+        public async Task AdicionarInteracaoAsync(Interacao interacao)
+        {
+            await _context.Interacoes.AddAsync(interacao);
+        }
+
         public async Task<bool> SalvarAsync()
         {
             return await _context.SaveChangesAsync() > 0;

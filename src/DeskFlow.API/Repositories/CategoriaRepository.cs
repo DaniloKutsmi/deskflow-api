@@ -45,7 +45,8 @@ namespace DeskFlow.API.Repositories
 
         public async Task<bool> ExisteChamadoComCategoriaAsync(int categoriaId)
         {
-            return false;
+            var chamado = await _context.Chamados.FirstOrDefaultAsync(c => c.CategoriaId == categoriaId);
+            return chamado != null;
         }
     }
 }

@@ -10,5 +10,6 @@ namespace DeskFlow.API.Data
         }
 
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Chamado> Chamados { get; set; }
     }
 }

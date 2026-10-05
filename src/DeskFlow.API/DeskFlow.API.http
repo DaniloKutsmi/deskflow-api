@@ -77,3 +77,30 @@ Content-Type: application/json
 {
   "solucao": "Tentando encerrar sem iniciar"
 }
+
+### Adicionar interacao em chamado Aberto (deve dar 201)
+POST {{baseUrl}}/api/chamados/2/interacoes
+Content-Type: application/json
+
+{
+  "autor": "Tecnico Joao",
+  "mensagem": "Iniciando diagnostico do equipamento"
+}
+
+### Adicionar interacao em chamado Fechado (deve dar 400)
+POST {{baseUrl}}/api/chamados/1/interacoes
+Content-Type: application/json
+
+{
+  "autor": "Tecnico Joao",
+  "mensagem": "Tentando comentar em chamado fechado"
+}
+
+### Adicionar interacao em chamado inexistente (deve dar 404)
+POST {{baseUrl}}/api/chamados/999/interacoes
+Content-Type: application/json
+
+{
+  "autor": "Tecnico Joao",
+  "mensagem": "Chamado que nao existe"
+}

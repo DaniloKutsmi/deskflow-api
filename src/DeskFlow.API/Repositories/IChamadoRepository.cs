@@ -7,6 +7,7 @@ namespace DeskFlow.API.Repositories
         Task AdicionarAsync(Chamado chamado);
         Task<Chamado?> ObterPorIdAsync(int id);
         void Atualizar(Chamado chamado);
+        Task AdicionarInteracaoAsync(Interacao interacao);
         Task<bool> SalvarAsync();
     }
 }

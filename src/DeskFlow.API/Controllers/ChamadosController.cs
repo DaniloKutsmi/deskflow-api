@@ -63,5 +63,25 @@ namespace DeskFlow.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("{id}/interacoes")]
+        public async Task<IActionResult> AdicionarInteracao(int id, [FromBody] Interacao interacao)
+        {
+            try
+            {
+                var interacaoCriada = await _service.AdicionarInteracaoAsync(id, interacao);
+
+                if (interacaoCriada == null)
+                {
+                    return NotFound("Chamado nao encontrado.");
+                }
+
+                return StatusCode(201, interacaoCriada);
+            }
+            catch (RegraNegocioException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -5,6 +5,8 @@ namespace DeskFlow.API.Repositories
     public interface IChamadoRepository
     {
         Task AdicionarAsync(Chamado chamado);
+        Task<Chamado?> ObterPorIdAsync(int id);
+        void Atualizar(Chamado chamado);
         Task<bool> SalvarAsync();
     }
 }

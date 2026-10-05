@@ -47,3 +47,33 @@ Content-Type: application/json
   "solicitanteNome": "Maria Souza",
   "categoriaId": 2
 }
+
+### Iniciar atendimento
+POST {{baseUrl}}/api/chamados/1/iniciar
+
+### Encerrar chamado
+POST {{baseUrl}}/api/chamados/1/encerrar
+Content-Type: application/json
+
+{
+  "solucao": "Fonte de alimentacao substituida"
+}
+
+### Encerrar sem solucao (deve dar 400)
+POST {{baseUrl}}/api/chamados/1/encerrar
+Content-Type: application/json
+
+{
+  "solucao": ""
+}
+
+### Iniciar chamado inexistente (deve dar 404)
+POST {{baseUrl}}/api/chamados/999/iniciar
+
+### Encerrar chamado Aberto (deve dar 400)
+POST {{baseUrl}}/api/chamados/2/encerrar
+Content-Type: application/json
+
+{
+  "solucao": "Tentando encerrar sem iniciar"
+}

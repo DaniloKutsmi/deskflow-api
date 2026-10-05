@@ -10,7 +10,5 @@ namespace DeskFlow.API.Models.Entities
         [Required]
         [MaxLength(100)]
         public string Nome { get; set; }
-
-        public List<Chamado> Chamados { get; set; } = new List<Chamado>();
     }
 }

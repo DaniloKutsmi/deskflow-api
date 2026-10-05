@@ -104,3 +104,24 @@ Content-Type: application/json
   "autor": "Tecnico Joao",
   "mensagem": "Chamado que nao existe"
 }
+
+### Detalhes do chamado 2 (com categoria e interacoes)
+GET {{baseUrl}}/api/chamados/2
+
+### Detalhes de chamado inexistente (deve dar 404)
+GET {{baseUrl}}/api/chamados/999
+
+### Listar todos os chamados
+GET {{baseUrl}}/api/chamados
+
+### Filtrar por status Aberto
+GET {{baseUrl}}/api/chamados?status=Aberto
+
+### Filtrar por prioridade
+GET {{baseUrl}}/api/chamados?prioridade=Alta
+
+### Filtros combinados (deve trazer so o chamado 1)
+GET {{baseUrl}}/api/chamados?status=Fechado&prioridade=Alta&categoriaId=2
+
+### Remover categoria com chamados (deve dar 400)
+DELETE {{baseUrl}}/api/categorias/2

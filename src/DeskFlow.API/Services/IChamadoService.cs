@@ -8,5 +8,7 @@ namespace DeskFlow.API.Services
         Task<Chamado?> IniciarAtendimentoAsync(int id);
         Task<Chamado?> EncerrarChamadoAsync(int id, string solucao);
         Task<Interacao?> AdicionarInteracaoAsync(int chamadoId, Interacao interacao);
+        Task<Chamado?> ObterDetalhesAsync(int id);
+        Task<List<Chamado>> ListarAsync(string? status, string? prioridade, int? categoriaId);
     }
 }

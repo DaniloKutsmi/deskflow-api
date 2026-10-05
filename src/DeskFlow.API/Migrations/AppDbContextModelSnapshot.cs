@@ -90,6 +90,36 @@ namespace DeskFlow.API.Migrations
                     b.ToTable("Chamados");
                 });
 
+            modelBuilder.Entity("DeskFlow.API.Models.Entities.Interacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ChamadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Mensagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChamadoId");
+
+                    b.ToTable("Interacoes");
+                });
+
             modelBuilder.Entity("DeskFlow.API.Models.Entities.Chamado", b =>
                 {
                     b.HasOne("DeskFlow.API.Models.Entities.Categoria", "Categoria")
@@ -101,9 +131,23 @@ namespace DeskFlow.API.Migrations
                     b.Navigation("Categoria");
                 });
 
+            modelBuilder.Entity("DeskFlow.API.Models.Entities.Interacao", b =>
+                {
+                    b.HasOne("DeskFlow.API.Models.Entities.Chamado", null)
+                        .WithMany("Interacoes")
+                        .HasForeignKey("ChamadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DeskFlow.API.Models.Entities.Categoria", b =>
                 {
                     b.Navigation("Chamados");
+                });
+
+            modelBuilder.Entity("DeskFlow.API.Models.Entities.Chamado", b =>
+                {
+                    b.Navigation("Interacoes");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,3 +1,4 @@
+using DeskFlow.API.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using DeskFlow.API.Data;
 using DeskFlow.API.Repositories;
@@ -17,6 +18,8 @@ builder.Services.AddScoped<IChamadoRepository, ChamadoRepository>();
 builder.Services.AddScoped<IChamadoService, ChamadoService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

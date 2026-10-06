@@ -125,3 +125,18 @@ GET {{baseUrl}}/api/chamados?status=Fechado&prioridade=Alta&categoriaId=2
 
 ### Remover categoria com chamados (deve dar 400)
 DELETE {{baseUrl}}/api/categorias/2
+
+### Iniciar chamado Fechado (400 em JSON via middleware)
+POST {{baseUrl}}/api/chamados/1/iniciar
+
+### Abrir chamado com categoria inexistente (500 em JSON, sem stack trace)
+POST {{baseUrl}}/api/chamados
+Content-Type: application/json
+
+{
+  "titulo": "Teste de erro",
+  "descricao": "Categoria que nao existe",
+  "prioridade": "Baixa",
+  "solicitanteNome": "Teste",
+  "categoriaId": 999
+}
